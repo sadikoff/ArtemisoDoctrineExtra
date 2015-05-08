@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="artemiso_doctrine_extra.extension_listener" class="Artemiso\DoctrineExtraBundle\Listener\DoctrineExtensionListener" public="false">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="artemiso_doctrine_extra.listener.tree" class="Gedmo\Tree\TreeListener" public="false">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
+        <service id="artemiso_doctrine_extra.listener.translatable" class="Gedmo\Translatable\TranslatableListener" public="false">
+            <call method="setDefaultLocale">
+                <argument>%locale%</argument>
+            </call>
+            <call method="setTranslationFallback">
+                <argument>false</argument>
+            </call>
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
+        <service id="artemiso_doctrine_extra.listener.timestampable" class="Gedmo\Timestampable\TimestampableListener" public="false">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
+        <service id="artemiso_doctrine_extra.listener.sluggable" class="Gedmo\Sluggable\SluggableListener" public="false">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
+        <service id="artemiso_doctrine_extra.listener.sortable" class="Gedmo\Sortable\SortableListener" public="false">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
+        <service id="artemiso_doctrine_extra.listener.loggable" class="Gedmo\Loggable\LoggableListener" public="false">
+            <tag name="doctrine.event_subscriber"/>
+        </service>
+    </services>
+
+</container>

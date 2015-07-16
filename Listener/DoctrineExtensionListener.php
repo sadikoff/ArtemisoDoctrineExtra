@@ -29,19 +29,19 @@ class DoctrineExtensionListener implements ContainerAwareInterface
     {
         /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $tokenStorage */
         $tokenStorage = $this->container->get(
-          'security.token_storage',
-          ContainerInterface::NULL_ON_INVALID_REFERENCE
+            'security.token_storage',
+            ContainerInterface::NULL_ON_INVALID_REFERENCE
         );
 
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $authorizationChecker */
         $authorizationChecker = $this->container->get(
-          'security.authorization_checker',
-          ContainerInterface::NULL_ON_INVALID_REFERENCE
+            'security.authorization_checker',
+            ContainerInterface::NULL_ON_INVALID_REFERENCE
         );
 
         if (null !== $tokenStorage && null !== $tokenStorage->getToken() && $authorizationChecker->isGranted(
-            'IS_AUTHENTICATED_REMEMBERED'
-          )
+                'IS_AUTHENTICATED_REMEMBERED'
+            )
         ) {
             $loggable = $this->container->get('artemiso_doctrine_extra.listener.loggable');
             $loggable->setUsername($tokenStorage->getToken()->getUsername());

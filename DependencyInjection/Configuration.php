@@ -25,20 +25,29 @@ class Configuration implements ConfigurationInterface
         $translatable = $mappings->arrayNode('translatable')->addDefaultsIfNotSet()->children();
         $translatable->scalarNode('type')->defaultValue('annotation');
         $translatable->scalarNode('alias')->defaultValue('Gedmo');
+        $translatable->booleanNode('is_bundle')->defaultFalse();
         $translatable->scalarNode('prefix')->defaultValue('Gedmo\Translatable\Entity');
-        $translatable->scalarNode('dir')->defaultValue('%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity');
+        $translatable->scalarNode('dir')->defaultValue(
+            '%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity'
+        );
 
         $loggable = $mappings->arrayNode('loggable')->addDefaultsIfNotSet()->children();
         $loggable->scalarNode('type')->defaultValue('annotation');
         $loggable->scalarNode('alias')->defaultValue('Gedmo');
+        $loggable->booleanNode('is_bundle')->defaultFalse();
         $loggable->scalarNode('prefix')->defaultValue('Gedmo\Loggable\Entity');
-        $loggable->scalarNode('dir')->defaultValue('%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity');
+        $loggable->scalarNode('dir')->defaultValue(
+            '%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity'
+        );
 
         $tree = $mappings->arrayNode('tree')->addDefaultsIfNotSet()->children();
         $tree->scalarNode('type')->defaultValue('annotation');
         $tree->scalarNode('alias')->defaultValue('Gedmo');
+        $tree->booleanNode('is_bundle')->defaultFalse();
         $tree->scalarNode('prefix')->defaultValue('Gedmo\Tree\Entity');
-        $tree->scalarNode('dir')->defaultValue('%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity');
+        $tree->scalarNode('dir')->defaultValue(
+            '%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity'
+        );
 
         $listeners = $rootNode->children()->arrayNode('listeners')->addDefaultsIfNotSet()->children();
 

@@ -5,6 +5,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="artemiso_doctrine_extra.transliterator" class="Artemiso\DoctrineExtraBundle\Utils\Transliterator" />
+
         <service id="artemiso_doctrine_extra.extension_listener"
                  class="Artemiso\DoctrineExtraBundle\Listener\DoctrineExtensionListener" public="false">
             <call method="setContainer">
@@ -32,6 +34,12 @@
         <service id="artemiso_doctrine_extra.listener.sluggable" class="Gedmo\Sluggable\SluggableListener"
                  public="false">
             <tag name="doctrine.event_subscriber"/>
+            <call method="setTransliterator">
+                <argument type="collection">
+                    <argument type="service" id="artemiso_doctrine_extra.transliterator" />
+                    <argument>transliterate</argument>
+                </argument>
+            </call>
         </service>
         <service id="artemiso_doctrine_extra.listener.sortable" class="Gedmo\Sortable\SortableListener" public="false">
             <tag name="doctrine.event_subscriber"/>

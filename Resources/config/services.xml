@@ -7,11 +7,18 @@
     <services>
         <service id="artemiso_doctrine_extra.transliterator" class="Artemiso\DoctrineExtraBundle\Utils\Transliterator" />
 
-        <service id="artemiso_doctrine_extra.extension_listener"
-                 class="Artemiso\DoctrineExtraBundle\Listener\DoctrineExtensionListener" public="false">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="artemiso_doctrine_extra.extension_translatable_listener"
+                 class="Artemiso\DoctrineExtraBundle\Listener\DoctrineExtensionTranslatableListener">
+            <argument type="service" id="artemiso_doctrine_extra.listener.translatable"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onLateKernelRequest" priority="-10"/>
+        </service>
+
+        <service id="artemiso_doctrine_extra.extension_loggable_listener"
+                 class="Artemiso\DoctrineExtraBundle\Listener\DoctrineExtensionLoggableListener">
+            <argument type="service" id="security.token_storage" on-invalid="null"/>
+            <argument type="service" id="security.authorization_checker" on-invalid="null"/>
+            <argument type="service" id="artemiso_doctrine_extra.listener.loggable"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
         </service>
 
         <service id="artemiso_doctrine_extra.listener.tree" class="Gedmo\Tree\TreeListener" public="false">

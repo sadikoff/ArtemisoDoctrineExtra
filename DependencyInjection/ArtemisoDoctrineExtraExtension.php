@@ -40,25 +40,15 @@ class ArtemisoDoctrineExtraExtension extends Extension implements PrependExtensi
             $definitionKey = 'artemiso_doctrine_extra.listener.'.$extension;
 
             if ($extension == 'translatable' && $enabled) {
-                $container->getDefinition('artemiso_doctrine_extra.extension_listener')->setPublic(true)->addTag(
-                    'kernel.event_listener',
-                    ['event' => 'kernel.request', 'method' => 'onLateKernelRequest', 'priority' => '-10']
-                );
-
                 $mappings['ArtemisoTranslatable'] = $config['mappings']['translatable'];
-
-                //$container->setParameter('artemiso_doctrine_extra.mappings.translatable', true);
+            } else {
+                $container->removeDefinition('artemiso_doctrine_extra.extension_translatable_listener');
             }
 
             if ($extension == 'loggable' && $enabled) {
-                $container->getDefinition('artemiso_doctrine_extra.extension_listener')->setPublic(true)->addTag(
-                    'kernel.event_listener',
-                    ['event' => 'kernel.request', 'method' => 'onKernelRequest']
-                );
-
                 $mappings['ArtemisoLoggable'] = $config['mappings']['loggable'];
-
-                //$container->setParameter('artemiso_doctrine_extra.mappings.loggable', true);
+            } else {
+                $container->removeDefinition('artemiso_doctrine_extra.extension_loggable_listener');
             }
 
             if ($extension == 'tree' && $enabled) {
@@ -67,7 +57,6 @@ class ArtemisoDoctrineExtraExtension extends Extension implements PrependExtensi
 
             if ($container->hasDefinition($definitionKey) && $enabled) {
                 $container->getDefinition($definitionKey)->setPublic(true);
-
             }
         }
 

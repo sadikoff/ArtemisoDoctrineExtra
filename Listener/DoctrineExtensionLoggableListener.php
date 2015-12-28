@@ -3,7 +3,6 @@
 namespace Artemiso\DoctrineExtraBundle\Listener;
 
 use Gedmo\Loggable\LoggableListener;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 

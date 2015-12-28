@@ -31,5 +31,4 @@ trait PersonalTranslation
             $translation->setObject($this);
         }
     }
-
 }
